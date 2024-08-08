@@ -18,9 +18,9 @@ public class ExampleSetupActivity extends AppCompatActivity {
 
     public static Context appContext;
     static final String appId = "client_default";
-    static final String urlRegister = "https://waap-register.demo.safous.com";
-    static final String urlAuth = "https://waap-auth.demo.safous.com";
-    static final String urlVerification = "https://waap-verification.demo.safous.com/api/devices/verify";
+    public String urlAuth = "https://waap-auth.example-waap.waap.safous.com";
+    public String urlRegister = "https://waap-register.example-waap.waap.safous.com";
+    public String urlVerification = "https://waap-client-verification.example-waap.waap.safous.com";
     static final String password = "examplesafous";
     public static File cert = null;
     public static ApiProtection protection;
