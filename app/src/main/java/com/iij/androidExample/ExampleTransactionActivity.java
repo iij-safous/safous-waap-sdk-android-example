@@ -18,8 +18,8 @@ import okhttp3.Response;
 
 public class ExampleTransactionActivity extends AppCompatActivity {
 
-    private String urlBasicApi = "https://simple-web.example.waap.safous.com/";
-    private String urlEchoApi = "https://echo.example.waap.safous.com/";
+    private String urlBasicApi = "https://simple-web.example-waap.waap.safous.com/";
+    private String urlEchoApi = "https://echo.example-waap.waap.safous.com/";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
