@@ -2,6 +2,7 @@ package com.iij.androidExample;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,35 +19,51 @@ public class ExampleRegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_example_register);
+        protection = new ApiProtection(getApplicationContext());
         exampleRegistration();
     }
 
     private void exampleRegistration() {
-        ApiProtectionCallBack callBack = new ApiProtectionCallBack() {
-            @Override
-            public void onSuccessReceived(OkHttpClient okHttpClient) {
-                Log.d("Response",okHttpClient.toString());
-                exampleVerifyDevice();
-            }
-            @Override
-            public void onErrorReceived(Error e) {
-                Log.e("Error",e.toString());
-            }
-        };
-        protection.registerDevice(callBack);
+        try {
+            ApiProtectionCallBack registerCallBack = new ApiProtectionCallBack() {
+                @Override
+                public void onSuccessReceived(OkHttpClient okHttpClient) {
+                    Log.d("Response",okHttpClient.toString());
+                    exampleVerifyDevice();
+                }
+                @Override
+                public void onErrorReceived(Error e) {
+                    Log.e("Error",e.toString());
+                }
+            };
+            protection.registerDevice(registerCallBack);
+        } catch(Exception e) {
+            Log.e("Error",e.toString());
+        }
+
     }
 
     private void exampleVerifyDevice() {
-        ApiProtectionCallBack callBack = new ApiProtectionCallBack() {
-            @Override
-            public void onSuccessReceived(OkHttpClient okHttpClient) {
-                Log.d("Response",okHttpClient.toString());
-            }
-            @Override
-            public void onErrorReceived(Error e) {
-                Log.e("Error",e.toString());
-            }
-        };
-        protection.verifyDevice(callBack,null);
+        try {
+            ApiProtectionCallBack verifyCallBack = new ApiProtectionCallBack() {
+                @Override
+                public void onSuccessReceived(OkHttpClient okHttpClient) {
+                    Log.d("Response",okHttpClient.toString());
+                    setNextTransaction();
+                }
+                @Override
+                public void onErrorReceived(Error e) {
+                    Log.e("Error",e.toString());
+                }
+            };
+            protection.verifyDevice(verifyCallBack,null);
+        } catch(Exception e) {
+            Log.e("Error",e.toString());
+        }
+    }
+
+    public void setNextTransaction(){
+        Intent i = new Intent(getApplicationContext(), ExampleTransactionActivity.class);
+        startActivity(i);
     }
 }
